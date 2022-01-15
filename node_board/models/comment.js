@@ -10,7 +10,7 @@ module.exports = class User extends Sequelize.Model {
                     allowNull: false,
                     primaryKey: true
                 },
-                commenet: {
+                comment: {
                     type: Sequelize.TEXT,
                     allowNull: false
                 }
@@ -19,8 +19,8 @@ module.exports = class User extends Sequelize.Model {
                 sequelize,
                 timestamps: true,
                 underscored: false, //_사용 여부
-                modelName: 'commenet', //js에서사용
-                tableName: 'commenets', //db에서 사용
+                modelName: 'comment', //js에서사용
+                tableName: 'comments', //db에서 사용
                 paranoid: false,
                 charset: 'utf8',
                 collate: 'utf8_general_ci',
@@ -28,14 +28,18 @@ module.exports = class User extends Sequelize.Model {
         )
     }
     static associate(db) {
-        db.User.belongsTo(db.users, {
+        db.comment.belongsTo(db.users, {
             foreignKey: 'userId',
             sourceKey: 'userId',
             onDelete: 'cascade'
         })
-        db.User.hasMany(db.posts, {
+        db.comment.hasMany(db.posts, {
             foreignKey: 'postId',
             sourceKey: 'postId'
+        })
+        db.comment.hasMany(db.likes, {
+            foreignKey: 'commentId',
+            sourceKey: 'commentId'
         })
     }
 }
