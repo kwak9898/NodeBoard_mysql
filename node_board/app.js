@@ -27,5 +27,5 @@ app.use((error, req, res, next) => {
 })
 
 app.listen(port, () => {
-    console.log(`listening at http://localhost:${port}`)
+    console.log(`http://localhost:${port}의 서버가 준비 되었습니다!!!`)
 })
