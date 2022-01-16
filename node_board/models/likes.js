@@ -8,7 +8,8 @@ module.exports = class User extends Sequelize.Model {
                 likeId: {
                     type: Sequelize.INTEGER,
                     allowNull: true,
-                    primaryKey: true
+                    primaryKey: true,
+                    autoIncrement: true
                 }
             },
             {

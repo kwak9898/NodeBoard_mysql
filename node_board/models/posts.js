@@ -8,7 +8,8 @@ module.exports = class User extends Sequelize.Model {
                 postId: {
                     type: Sequelize.INTEGER,
                     allowNull: true,
-                    primaryKey: true
+                    primaryKey: true,
+                    autoIncrement: true
                 },
                 title: {
                     type: Sequelize.STRING(50),

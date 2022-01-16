@@ -8,7 +8,8 @@ module.exports = class User extends Sequelize.Model {
                 commentId: {
                     type: Sequelize.INTEGER,
                     allowNull: true,
-                    primaryKey: true
+                    primaryKey: true,
+                    autoIncrement: true
                 },
                 comment: {
                     type: Sequelize.TEXT,

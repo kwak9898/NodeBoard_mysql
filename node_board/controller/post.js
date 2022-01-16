@@ -2,28 +2,21 @@ const Post = require('../models/posts')
 const jwt = require('jsonwebtoken')
 const Joi = require('joi')
 const { Op } = require('sequelize')
+const { post } = require('../routers')
 
 const creatPost = async (req, res, next) => {
     try {
-        const { user } = res.locals
-        const { title, content, password, } = req.body
-
-        let newpost = await Post.findAll({ order: [["DESC"]] })
-        let postId = 1
-
-        if (newpost.length !== 0) {
-            postId = newpost[0]["postId"] + 1
-        }
+        const { userName } = res.locals.user
+        const { title, content, password } = req.body
 
         await Post.create({
-            postId: postId,
+            userName: userName,
             title: title,
             content: content,
-            passWord: password,
-            userName: user.userName
+            passWord: password
         })
-        res.status(200).send({
-            result: "SUCCESS!"
+        res.status.send({
+            result: "SUCCESS!!"
         })
     } catch (error) {
         console.log('-------------------------------------')

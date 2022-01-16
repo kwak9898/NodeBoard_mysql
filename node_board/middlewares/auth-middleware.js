@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
     }
 
     try {
-        const { userName } = jwt.verify(tokenValue, "my-secret-key")
+        const { userName } = jwt.verify(tokenValue, "my-token")
 
         users.findByPk(userName).then((user) => {
             res.locals.user = user
