@@ -7,7 +7,7 @@ module.exports = class User extends Sequelize.Model {
             {
                 likeId: {
                     type: Sequelize.INTEGER,
-                    allowNull: false,
+                    allowNull: true,
                     primaryKey: true
                 }
             },

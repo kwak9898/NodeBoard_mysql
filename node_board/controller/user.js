@@ -12,7 +12,6 @@ const postUsersSchema = Joi.object({
 const createUser = async (req, res, next) => {
     try {
         const { username, password, confirm } = await postUsersSchema.validateAsync(req.body)
-        console.log(username, password, confirm)
 
         if (password !== confirm) {
             res.status(400).send({

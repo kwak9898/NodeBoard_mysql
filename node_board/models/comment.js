@@ -7,12 +7,12 @@ module.exports = class User extends Sequelize.Model {
             {
                 commentId: {
                     type: Sequelize.INTEGER,
-                    allowNull: false,
+                    allowNull: true,
                     primaryKey: true
                 },
                 comment: {
                     type: Sequelize.TEXT,
-                    allowNull: false
+                    allowNull: true
                 }
             },
             {

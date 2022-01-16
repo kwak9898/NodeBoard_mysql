@@ -7,12 +7,12 @@ module.exports = class User extends Sequelize.Model {
             {
                 postId: {
                     type: Sequelize.INTEGER,
-                    allowNull: false,
+                    allowNull: true,
                     primaryKey: true
                 },
                 title: {
                     type: Sequelize.STRING(50),
-                    allowNull: false,
+                    allowNull: true,
                 },
                 content: {
                     type: Sequelize.STRING(30),
@@ -20,7 +20,7 @@ module.exports = class User extends Sequelize.Model {
                 },
                 passWord: {
                     type: Sequelize.STRING(30),
-                    allowNull: false
+                    allowNull: true
                 },
             },
             {
