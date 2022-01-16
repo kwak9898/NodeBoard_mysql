@@ -25,8 +25,8 @@ module.exports = class User extends Sequelize.Model {
     }
     static associate(db) {
         db.likes.belongsTo(db.users, {
-            foreignKey: 'userId',
-            targetKey: 'userId',
+            foreignKey: 'userName',
+            targetKey: 'userName',
             onDelete: 'cascade'
         })
         db.likes.belongsTo(db.posts, {
