@@ -66,19 +66,50 @@ const getPost = async (req, res, next) => {
 
 // 게시물 수정 시 글 가져오기
 const checkUserPost = async (req, res, next) => {
-    const { userName } = res.locals.user
-    const { postId } = req.params
+    try {
+        const { userName } = res.locals.user
+        const { postId } = req.params
 
-    const check = await Post.findOne({ where: { postId: postId } })
+        const check = await Post.findOne({ where: { postId: postId } })
 
-    if (check["userName"] === userName) {
+        if (check["userName"] === userName) {
+            res.status(400).send({
+                errorMessage: "유저 정보가 일치하지 않습니다."
+            })
+            return
+        } else {
+            res.status(200).send({
+                result: check
+            })
+        }
+    } catch (error) {
+        console.log('-------------------------------------')
+        console.log('에러발생:' + error)
         res.status(400).send({
-            errorMessage: "유저 정보가 일치하지 않습니다."
+            errorMessage: "요청한 형식이 올바르지 않습니다."
         })
-        return
-    } else {
-        res.status(200).send({
-            result: check
+    }
+}
+
+// 게시물 수정하기
+const patchPost = async (req, res, next) => {
+    try {
+        const { postId } = req.params
+        const { username, password, title, content } = req.body
+
+        const posts = await Post.findOne({ where: { postId: postId } })
+
+        if (posts) {
+            await Post.update({ userName: username, title: title, content: content }, { where: { postId } })
+            res.send({ result: "SUCCESS!!!" })
+        } else {
+            res.send({ result: "fail..." })
+        }
+    } catch (error) {
+        console.log('-------------------------------------')
+        console.log('에러발생:' + error)
+        res.status(400).send({
+            errorMessage: "요청한 형식이 올바르지 않습니다."
         })
     }
 }
