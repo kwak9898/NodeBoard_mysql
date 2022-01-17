@@ -97,8 +97,7 @@ const patchPost = async (req, res, next) => {
         const { postId } = req.params
         const { username, password, title, content } = req.body
 
-        const posts = await Post.findOne({ where: { postId: postId } })
-
+        const posts = await Post.findOne({ where: { postId: postId, passWord: password }, raw: true })
         if (posts) {
             await Post.update({ userName: username, title: title, content: content }, { where: { postId } })
             res.send({ result: "SUCCESS!!!" })
