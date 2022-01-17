@@ -31,9 +31,8 @@ const creatPost = async (req, res, next) => {
 // 게시물 전체 조회
 const getPost = async (req, res, next) => {
     try {
-        const { createdAt } = req.query
-        const existPost = await Post.findOne({ order: [["postId", "DESC"]], where: { createdAt: createdAt } })
-
+        const { postId } = req.query
+        const existPost = await Post.findAll({ order: [["postId", "DESC"]], where: { postId: postId } })
         res.status(200).send({ result: existPost })
     } catch (error) {
         console.log('-------------------------------------')
