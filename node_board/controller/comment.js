@@ -41,6 +41,8 @@ const getComment = async (req, res, next) => {
         where: { postId: postId },
         raw: true
     })
+
+    res.status(200).send({ result: "SUCCESS!!!" })
 }
 
 module.exports = {
