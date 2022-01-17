@@ -4,6 +4,7 @@ const Joi = require('joi')
 const { Op } = require('sequelize')
 const { post } = require('../routers')
 
+// 게시물 작성
 const creatPost = async (req, res, next) => {
     try {
         const { userName } = res.locals.user
@@ -15,7 +16,7 @@ const creatPost = async (req, res, next) => {
             content: content,
             passWord: password
         })
-        res.status.send({
+        res.status(200).send({
             result: "SUCCESS!!"
         })
     } catch (error) {
@@ -27,6 +28,23 @@ const creatPost = async (req, res, next) => {
     }
 }
 
+// 게시물 전체 조회
+const getPost = async (req, res, next) => {
+    try {
+        const { createdAt } = req.query
+        const existPost = await Post.findOne({ order: [["postId", "DESC"]], where: { createdAt: createdAt } })
+
+        res.status(200).send({ result: existPost })
+    } catch (error) {
+        console.log('-------------------------------------')
+        console.log('에러발생:' + error)
+        res.status(400).send({
+            errorMessage: "요청한 형식이 올바르지 않습니다."
+        })
+    }
+}
+
 module.exports = {
-    creatPost
+    creatPost,
+    getPost
 }
