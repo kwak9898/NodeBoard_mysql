@@ -34,7 +34,7 @@ module.exports = class User extends Sequelize.Model {
             sourceKey: 'userName',
             onDelete: 'cascade'
         })
-        db.comment.hasMany(db.posts, {
+        db.comment.belongsTo(db.posts, {
             foreignKey: 'postId',
             sourceKey: 'postId'
         })

@@ -35,14 +35,14 @@ const createComment = async (req, res, next) => {
 // 댓글 조회
 const getComment = async (req, res, next) => {
     const { postId } = req.params
-
+    console.log(postId)
     const existComment = await Comment.findAll({
         order: [["commentId", "DESC"]],
         where: { postId: postId },
         raw: true
     })
-
-    res.status(200).send({ result: "SUCCESS!!!" })
+    console.log(existComment)
+    res.status(200).send({ result: existComment })
 }
 
 module.exports = {
