@@ -118,5 +118,6 @@ module.exports = {
     creatPost,
     getPosts,
     getPost,
-    checkUserPost
+    checkUserPost,
+    patchPost
 }
