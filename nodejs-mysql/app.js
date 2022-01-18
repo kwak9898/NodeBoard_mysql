@@ -4,13 +4,13 @@ dotenv.config()
 const port = 3000
 const app = express()
 const { sequelize } = require('./models')
-const indexRouter = require('./routes/index')
+const indexRouter = require('./routers/index')
 
 //db 연결
 sequelize
     .sync({ force: false })
     .then(() => {
-        console.log('db Connected!!!!!!')
+        console.log('DB 연결 성공!!!!!!!')
     })
     .catch((err) => {
         console.log(err)

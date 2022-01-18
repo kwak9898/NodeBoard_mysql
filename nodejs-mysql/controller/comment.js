@@ -1,5 +1,5 @@
-const Comment = require('../models/comment')
-const Posts = require('../models/posts')
+const Comment = require('../models/Comment')
+const Posts = require('../models/Post')
 
 // 댓글 작성
 const createComment = async (req, res, next) => {

@@ -30,17 +30,17 @@ module.exports = class User extends Sequelize.Model {
     }
     static associate(db) {
         db.Comment.belongsTo(db.User, {
-            foreignKey: 'fk_userName',
+            foreignKey: 'userName',
             targetKey: 'userName',
             onDelete: 'cascade'
         })
         db.Comment.belongsTo(db.Post, {
-            foreignKey: 'fk_postId',
+            foreignKey: 'postId',
             targetKey: 'postId',
             onDelete: 'cascade'
         })
         db.Comment.hasMany(db.Like, {
-            foreignKey: 'fk_commentId',
+            foreignKey: 'commentId',
             sourceKey: 'commentId'
         })
     }

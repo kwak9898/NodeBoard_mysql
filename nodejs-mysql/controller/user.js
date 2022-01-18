@@ -1,4 +1,4 @@
-const Users = require('../models/users')
+const Users = require('../models/User')
 const jwt = require('jsonwebtoken')
 const Joi = require('joi')
 const { Op } = require('sequelize')

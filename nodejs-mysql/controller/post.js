@@ -1,8 +1,4 @@
-const Post = require('../models/posts')
-const jwt = require('jsonwebtoken')
-const Joi = require('joi')
-const { Op } = require('sequelize')
-const { post } = require('../routers')
+const Post = require('../models/Post')
 
 // 게시물 작성
 const creatPost = async (req, res, next) => {
@@ -70,9 +66,12 @@ const checkUserPost = async (req, res, next) => {
         const { userName } = res.locals.user
         const { postId } = req.params
 
-        const check = await Post.findOne({ where: { postId: postId } })
+        const check = await Post.findOne({
+            where: { postId: postId },
+            raw: true
+        })
 
-        if (check["userName"] === userName) {
+        if (check['userName'] !== userName) {
             res.status(400).send({
                 errorMessage: "유저 정보가 일치하지 않습니다."
             })
