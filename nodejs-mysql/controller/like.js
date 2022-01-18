@@ -4,36 +4,25 @@ const Comments = require('../models/Comment')
 const Posts = require('../models/Post')
 const { Op } = require('sequelize')
 
-const createLike = async (req, res, next) => {
+const createPostLike = async (req, res, next) => {
     try {
         const { userName } = res.locals.user
         const { likeNo } = req.params
 
         const existLike = await Likes.findOne({
-            where: { userName: userName },
-            [Op.or]: { postId: likeNo, commentId: likeNo }
+            where: { userName: userName, postId: likeNo }
         })
-        const existPost = await Posts.findOne({
-            where: { postId: likeNo },
-            raw: true
-        })
+        // const existPost = await Posts.findOne({
+        //     where: { postId: likeNo },
+        //     raw: true
+        // })
 
         if (!existLike) {
-            if (existPost) {
-                await Likes.create({ userName: userName, postId: likeNo })
-                res.status(200).send({ result: "true" })
-            } else {
-                await Likes.create({ userName: userName, commentId: likeNo })
-                res.status(200).send({ result: "true" })
-            }
+            await Likes.create({ userName: userName, postId: likeNo })
+            res.status(200).send({ result: "true" })
         } else {
-            if (existPost) {
-                await Likes.destory({ where: { userName: userName, postId: likeNo } })
-                res.status(200).send({ result: "false" })
-            } else {
-                await Likes.destory({ where: { userName: userName, commentId: likeNo } })
-                res.status(200).send({ result: "false" })
-            }
+            await Likes.destroy({ where: { userName: userName, postId: likeNo } })
+            res.status(200).send({ result: "false" })
         }
     } catch (error) {
         console.log('-------------------------------------')
@@ -44,6 +33,12 @@ const createLike = async (req, res, next) => {
     }
 }
 
+// const createCommentLike = async (req, res, next) => {
+
+//     const { likeNo } = req.params
+// }
+
 module.exports = {
-    createLike
+    createPostLike,
+
 }
