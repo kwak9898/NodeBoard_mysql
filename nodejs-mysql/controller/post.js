@@ -28,7 +28,11 @@ const creatPost = async (req, res, next) => {
 const getPosts = async (req, res, next) => {
     try {
         const { postId } = req.query
-        const existPost = await Post.findAll({ where: { postId: postId } })
+        const existPost = await Post.findAll({
+            order: [['createdAt', 'DESC']],
+            where: { postId: postId },
+            raw: true
+        })
 
         res.status(200).send({
             result: existPost

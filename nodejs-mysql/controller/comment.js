@@ -35,8 +35,7 @@ const createComment = async (req, res, next) => {
 // 댓글 조회
 const getComment = async (req, res, next) => {
     const { postId } = req.params
-    const existComment = await Posts.findAll({
-        attributes: ['commentId'],
+    const existComment = await Comment.findAll({
         order: [['commentId', 'DESC']],
         where: { postId: postId },
         raw: true
