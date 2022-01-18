@@ -28,7 +28,7 @@ module.exports = class User extends Sequelize.Model {
                 sequelize,
                 timestamps: true,
                 underscored: false, //_사용 여부
-                modelName: 'posts', //js에서사용
+                modelName: 'Post', //js에서사용
                 tableName: 'posts', //db에서 사용
                 paranoid: false,
                 charset: 'utf8',
@@ -37,16 +37,16 @@ module.exports = class User extends Sequelize.Model {
         )
     }
     static associate(db) {
-        db.posts.belongsTo(db.users, {
+        db.Post.belongsTo(db.User, {
             foreignKey: 'userName',
-            sourceKey: 'userName',
+            targetKey: 'userName',
             onDelete: 'cascade'
         })
-        db.posts.hasMany(db.like, {
+        db.Post.hasMany(db.Like, {
             foreignKey: 'postId',
             sourceKey: 'postId'
         })
-        db.posts.hasMany(db.comment, {
+        db.Post.hasMany(db.Comment, {
             foreignKey: 'postId',
             sourceKey: 'postId'
         })

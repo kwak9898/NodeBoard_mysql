@@ -28,9 +28,9 @@ Comment.init(sequelize)
 Post.init(sequelize)
 Like.init(sequelize)
 
-User.init(sequelize)
-Comment.init(sequelize)
-Post.init(sequelize)
-Like.init(sequelize)
+User.associate(sequelize)
+Comment.associate(sequelize)
+Post.associate(sequelize)
+Like.associate(sequelize)
 
 module.exports = db
