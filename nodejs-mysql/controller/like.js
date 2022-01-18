@@ -4,6 +4,7 @@ const Comments = require('../models/Comment')
 const Posts = require('../models/Post')
 const { Op } = require('sequelize')
 
+// 게시물 좋아요 기능
 const createPostLike = async (req, res, next) => {
     try {
         const { userName } = res.locals.user
@@ -12,10 +13,6 @@ const createPostLike = async (req, res, next) => {
         const existLike = await Likes.findOne({
             where: { userName: userName, postId: likeNo }
         })
-        // const existPost = await Posts.findOne({
-        //     where: { postId: likeNo },
-        //     raw: true
-        // })
 
         if (!existLike) {
             await Likes.create({ userName: userName, postId: likeNo })
@@ -33,6 +30,7 @@ const createPostLike = async (req, res, next) => {
     }
 }
 
+// 댓글 좋아요 기능
 const createCommentLike = async (req, res, next) => {
     try {
         const { userName } = res.locals.user

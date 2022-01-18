@@ -9,6 +9,7 @@ const postUsersSchema = Joi.object({
     confirm: Joi.string().required(),
 })
 
+// 회원가입
 const createUser = async (req, res, next) => {
     try {
         const { username, password, confirm } = await postUsersSchema.validateAsync(req.body)
@@ -49,6 +50,7 @@ const postLoginSchema = Joi.object({
     password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{4,30}$")).required(),
 });
 
+// 로그인
 const loginUser = async (req, res, next) => {
     try {
         const { username, password } = await postLoginSchema.validateAsync(req.body)

@@ -2,6 +2,7 @@ const Users = require('../models/User')
 const Likes = require('../models/Like')
 const Posts = require('../models/Post')
 const Comment = require('../models/Comment')
+const { put } = require('../routers/like')
 
 const getMypage = async (req, res, next) => {
     try {
@@ -48,6 +49,30 @@ const getMypage = async (req, res, next) => {
     }
 }
 
+const putMypage = async (req, res, next) => {
+    try {
+        const { userName } = req.params
+        const { passWord } = req.body
+
+        const putUser = await Users.findOne({
+            where: { userName: userName },
+            raw: true
+        })
+        console.log(putUser)
+        if (putUser) {
+            await Users.update({ passWord: passWord }, { where: { userName: userName } })
+            res.status(200).send({ result: "SUCCESS!" })
+        }
+    } catch (error) {
+        console.log('-------------------------------------')
+        console.log('에러발생:' + error)
+        res.status(400).send({
+            errorMessage: "요청한 형식이 올바르지 않습니다."
+        })
+    }
+}
+
 module.exports = {
-    getMypage
+    getMypage,
+    putMypage
 }
