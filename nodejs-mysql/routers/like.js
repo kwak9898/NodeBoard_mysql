@@ -4,6 +4,6 @@ const authMiddleware = require('../middlewares/auth-middleware')
 const router = express.Router()
 
 router.post('/postLikes/:likeNo', authMiddleware, likeControll.createPostLike)
-// router.post('/likes/:likeNo', authMiddleware, likeControll)
+router.post('/commentLikes/:likeNo', authMiddleware, likeControll.createCommentLike)
 
 module.exports = router
